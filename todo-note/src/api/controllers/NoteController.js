@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import Note from "../models/note";
 
 let notes = [
     {
@@ -31,12 +32,17 @@ export const createNode = (req, res) => {
 
     if (!name) return res.json({ message: "Name is required" }).status(400);
 
-    const newNote = {
+    const newNote = new Note({
         id: uuidv4(),
         name,
-    };
+    });
 
     notes.push(newNote);
+    // const saveNote = new Note;
+    // saveNote = newNote;
+    // saveNote.save();
+
+    newNote.save();
 
     return res.json({ notes }).status(201);
 };
